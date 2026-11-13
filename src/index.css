@@ -1,0 +1,242 @@
+@import "tailwindcss";
+
+@theme {
+  --color-cream: #fff7ea;
+  --color-paper: #fffdf8;
+  --color-ink: #231942;
+  --color-sun: #ffc93c;
+  --color-coral: #ff7a6b;
+  --color-mint: #5fe0b7;
+  --color-sky: #6cc9ff;
+  --color-grape: #7c5cff;
+  --color-bubble: #ff9ed2;
+
+  --font-display: "Fredoka", "Baloo Bhaijaan 2", ui-rounded, system-ui, sans-serif;
+  --font-sans: "Nunito", "Baloo Bhaijaan 2", ui-rounded, system-ui, sans-serif;
+
+  --shadow-pop-sm: 3px 3px 0 0 var(--color-ink);
+  --shadow-pop: 5px 5px 0 0 var(--color-ink);
+  --shadow-pop-lg: 9px 9px 0 0 var(--color-ink);
+
+  --animate-marquee: marquee 32s linear infinite;
+  --animate-marquee-slow: marquee 60s linear infinite;
+  --animate-floaty: floaty 5s ease-in-out infinite;
+  --animate-wiggle: wiggle 2.4s ease-in-out infinite;
+
+  @keyframes marquee {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+  @keyframes floaty {
+    0%, 100% {
+      transform: translateY(0) rotate(-4deg);
+    }
+    50% {
+      transform: translateY(-14px) rotate(5deg);
+    }
+  }
+  @keyframes wiggle {
+    0%, 100% {
+      transform: rotate(-6deg);
+    }
+    50% {
+      transform: rotate(6deg);
+    }
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-cream);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Arabic letters must stay joined: never space or uppercase them */
+html[dir="rtl"] * {
+  letter-spacing: 0 !important;
+}
+
+::selection {
+  background: var(--color-sun);
+  color: var(--color-ink);
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-grape);
+  outline-offset: 3px;
+}
+
+.dots {
+  background-image: radial-gradient(rgba(35, 25, 66, 0.13) 1.5px, transparent 1.5px);
+  background-size: 22px 22px;
+}
+
+.marquee-pause:hover .animate-marquee,
+.marquee-pause:hover .animate-marquee-slow {
+  animation-play-state: paused;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  scrollbar-width: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .animate-marquee,
+  .animate-marquee-slow,
+  .animate-floaty,
+  .animate-wiggle {
+    animation: none;
+  }
+}
+
+/* ---------- living characters ---------- */
+@keyframes buddy-bob {
+  0%, 100% { translate: 0 0; }
+  50% { translate: 0 -2.5%; }
+}
+@keyframes buddy-blink {
+  0%, 93%, 100% { transform: scaleY(1); }
+  96% { transform: scaleY(0.08); }
+}
+@keyframes buddy-wave {
+  from { transform: rotate(-118deg); }
+  to { transform: rotate(-158deg); }
+}
+@keyframes kid-cheer-l {
+  from { transform: rotate(128deg); }
+  to { transform: rotate(152deg); }
+}
+@keyframes buddy-cape {
+  0%, 100% { transform: skewX(0deg); }
+  50% { transform: skewX(5deg); }
+}
+@keyframes buddy-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.45; }
+}
+@keyframes buddy-wiggle {
+  0%, 100% { transform: rotate(-4deg); }
+  50% { transform: rotate(4deg); }
+}
+@keyframes buddy-zzz {
+  0% { opacity: 0; transform: translate(0, 6px); }
+  40% { opacity: 1; }
+  100% { opacity: 0; transform: translate(6px, -12px); }
+}
+@keyframes twinkle {
+  0%, 100% { opacity: 0.25; }
+  50% { opacity: 1; }
+}
+@keyframes drift {
+  from { transform: translateX(0); }
+  to { transform: translateX(-80px); }
+}
+@keyframes rise {
+  from { transform: translateY(0); opacity: 0; }
+  15% { opacity: 0.8; }
+  to { transform: translateY(-420px); opacity: 0; }
+}
+@keyframes sway {
+  0%, 100% { transform: rotate(-5deg); }
+  50% { transform: rotate(5deg); }
+}
+
+.buddy-bob { animation: buddy-bob 3.2s ease-in-out infinite; }
+.buddy-blink {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: buddy-blink 4.6s infinite;
+  animation-delay: var(--blink-delay, 0s);
+}
+.buddy-arm { transition: transform 0.3s ease; }
+.buddy-wave { animation: buddy-wave 0.38s ease-in-out infinite alternate; }
+.kid-cheer-r { animation: buddy-wave 0.4s ease-in-out infinite alternate; }
+.kid-cheer-l { animation: kid-cheer-l 0.4s ease-in-out infinite alternate; }
+.buddy-cape { transform-box: fill-box; transform-origin: top center; animation: buddy-cape 2.4s ease-in-out infinite; }
+.buddy-pulse { animation: buddy-pulse 1.6s ease-in-out infinite; }
+.buddy-wiggle { animation: buddy-wiggle 2.2s ease-in-out infinite; }
+.buddy-zzz { animation: buddy-zzz 2.4s ease-in-out infinite; }
+.twinkle { animation: twinkle 2.6s ease-in-out infinite; }
+.drift { animation: drift 7s ease-in-out infinite alternate; }
+.rise { animation: rise 7s linear infinite; }
+.sway { transform-box: fill-box; transform-origin: bottom center; animation: sway 4s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .buddy-bob, .buddy-blink, .buddy-wave, .kid-cheer-r, .kid-cheer-l, .buddy-cape,
+  .buddy-pulse, .buddy-wiggle, .buddy-zzz, .twinkle, .drift, .rise, .sway {
+    animation: none;
+  }
+}
+
+/* ---------- the printable picture book (see src/shop/PrintBook.tsx) ---------- */
+.print-root {
+  display: none;
+}
+@media print {
+  @page {
+    size: A4 landscape;
+    margin: 0;
+  }
+  html,
+  body {
+    height: auto !important;
+    overflow: visible !important;
+    background: #fff !important;
+  }
+  #root {
+    display: none !important;
+  }
+  .print-root {
+    display: block;
+  }
+  .print-page {
+    position: relative;
+    width: 297mm;
+    height: 210mm;
+    overflow: hidden;
+    break-after: page;
+    page-break-after: always;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .print-page:last-child {
+    break-after: auto;
+    page-break-after: auto;
+  }
+  .print-root * {
+    animation: none !important;
+  }
+}
+
+/* ---------- scene weather and objects ---------- */
+@keyframes fx-rain {
+  to { transform: translateY(1300%); }
+}
+@keyframes fx-wind {
+  from { transform: translateX(-140%); opacity: 0; }
+  30% { opacity: 1; }
+  to { transform: translateX(700%); opacity: 0; }
+}
+.fx-rain { animation: fx-rain 0.9s linear infinite; }
+.fx-wind { left: 0; animation: fx-wind 1.8s ease-in infinite; }
+/* emoji objects get the same ink outline as the drawn characters */
+.scene-prop {
+  filter: drop-shadow(0.35cqw 0 0 #231942) drop-shadow(-0.35cqw 0 0 #231942) drop-shadow(0 0.35cqw 0 #231942) drop-shadow(0 -0.35cqw 0 #231942);
+}
+@media (prefers-reduced-motion: reduce) {
+  .fx-rain, .fx-wind { animation: none; }
+}
